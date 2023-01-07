@@ -6,7 +6,7 @@ const logoHeight = "50px";
 export const lightTheme: ThemeConfig = {
   styles: { colors: lightColors, logoHeight },
   strings: {},
-  brand: {},
+  brand: {logo: "https://gateway.pinata.cloud/ipfs/QmZRV77wAZw4FycJaYByhJ1AwNFX18ZCPBPcJnKMKuwrgr"},
   nav: {
     primary: [],
     secondary: [],
