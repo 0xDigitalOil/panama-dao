@@ -1,3 +1,3 @@
-# My DAO Governance
+# The Panama DAO Governance
 
-Edit your voting description in the `templates/vote/description.md` file
+These are the proposals that have been submitted by The Panama DAO members.

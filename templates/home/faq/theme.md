@@ -1,6 +1,6 @@
 ---
-title: How do I edit my theme?
+title: What kind of stuff are we doing?
 order: 1
 ---
 
-Open the `theme.config.ts` file in the root of your project directoy. You can see theme options in the `types/ThemeConfig/index.ts` file.
+Coming soon...
