@@ -11,6 +11,9 @@ import { GetStaticPropsResult, InferGetStaticPropsType } from "next";
 import { serialize } from "next-mdx-remote/serialize";
 import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 import { formatTreasuryBalance } from "@/utils/formatTreasuryBalance";
+import { Fragment } from "react";
+import { useUserVotes } from "@/hooks/fetch/useUserVotes";
+import { useCurrentThreshold } from "@/hooks/fetch/useCurrentThreshold";
 
 export const getStaticProps = async (): Promise<
   GetStaticPropsResult<{
@@ -45,6 +48,13 @@ export default function Vote({
   const { data: treasuryBalance } = useTreasuryBalance({
     treasuryContract: addresses?.treasury,
   });
+  const { data: userVotes } = useUserVotes();
+  const { data: currentThreshold } = useCurrentThreshold({
+    governorContract: addresses?.governor,
+  });
+
+  console.log("userVotes", userVotes);
+  console.log("currentThreshold", currentThreshold);
 
   const getProposalNumber = (i: number) => {
     if (!proposals) return 0;
@@ -75,7 +85,19 @@ export default function Vote({
       </div>
 
       <div className="mt-12">
-        <div className="text-4xl font-heading text-skin-base">Proposals</div>
+        <div className="flex items-center justify-between">
+          <div className="text-4xl font-heading text-skin-base">Proposals</div>
+          {userVotes && userVotes >= (currentThreshold || 0) ? (
+            <Link
+              href={"/create-proposal"}
+              className="text-sm bg-skin-muted hover:bg-skin-button-accent-hover hover:text-skin-inverted text-skin-muted w-36 h-8 rounded-lg flex items-center justify-around"
+            >
+              Submit proposal
+            </Link>
+          ) : (
+            <Fragment />
+          )}
+        </div>
         <div>
           {proposals?.map((x, i) => (
             <ProposalPlacard

@@ -6,7 +6,7 @@ const logoHeight = "50px";
 export const lightTheme: ThemeConfig = {
   styles: { colors: lightColors, logoHeight },
   strings: {},
-  brand: {logo: "diablicos_logo.svg"},
+  brand: {},
   nav: {
     primary: [],
     secondary: [],

@@ -14,8 +14,11 @@ import sanitizeHtml from "sanitize-html";
 import ModalWrapper from "@/components/ModalWrapper";
 import VoteModal from "@/components/VoteModal";
 import { Fragment, useState } from "react";
-import { useTokenBalance } from "@/hooks/fetch/useTokenBalance";
 import { Proposal } from "@/services/nouns-builder/governor";
+import useSWR from "swr";
+import { ETHERSCAN_BASEURL, ETHER_ACTOR_BASEURL } from "constants/urls";
+import { BigNumber, ethers } from "ethers";
+import { useUserVotes } from "@/hooks/fetch/useUserVotes";
 
 export default function ProposalComponent() {
   const { data: addresses } = useDAOAddresses({
@@ -34,7 +37,6 @@ export default function ProposalComponent() {
     : 0;
 
   const proposal = proposals?.find((x) => x.proposalId === proposalid);
-  const isActive = proposal?.state === 1;
 
   const { data: ensName } = useEnsName({
     address: proposal?.proposal.proposer,
@@ -100,9 +102,14 @@ export default function ProposalComponent() {
             </div>
             <div className="mt-4 text-2xl font-heading text-skin-muted">
               Proposed by{" "}
-              <span className="text-skin-highlighted">
+              <Link
+                href={`${ETHERSCAN_BASEURL}/address/${proposal.proposal.proposer}`}
+                rel="noopener noreferrer"
+                target="_blank"
+                className="text-skin-highlighted underline"
+              >
                 {ensName || shortenAddress(proposal.proposal.proposer)}
-              </span>
+              </Link>
             </div>
           </div>
         </div>
@@ -166,7 +173,9 @@ export default function ProposalComponent() {
       </div>
 
       <div className="mt-12">
-        <div className="text-2xl font-heading text-skin-muted">Description</div>
+        <div className="text-2xl font-heading text-skin-base font-bold">
+          Description
+        </div>
 
         <div
           className="prose prose-skin mt-4 prose-img:w-auto break-words max-w-[90vw] sm:max-w-[1000px]"
@@ -177,9 +186,82 @@ export default function ProposalComponent() {
           }}
         />
       </div>
+
+      <div className="text-2xl font-heading text-skin-base mt-8 font-bold">
+        Proposed Transactions
+      </div>
+
+      <div className="mt-4 max-w-[75vw]">
+        {proposal.targets.map((_, index) => (
+          <ProposedTransactions
+            key={index}
+            target={proposal.targets[index]}
+            value={proposal.values[index]}
+            calldata={proposal.calldatas[index]}
+          />
+        ))}
+      </div>
     </Layout>
   );
 }
+
+type EtherActorResponse = {
+  name: string;
+  decoded: string[];
+  functionName: string;
+  isVerified: boolean;
+};
+
+const ProposedTransactions = ({
+  target,
+  value,
+  calldata,
+}: {
+  target: string;
+  value: number;
+  calldata: string;
+}) => {
+  const { data, error } = useSWR<EtherActorResponse>(
+    calldata ? `${ETHER_ACTOR_BASEURL}/decode/${target}/${calldata}` : undefined
+  );
+  const valueBN = BigNumber.from(value);
+
+  if (!data || error) return <Fragment />;
+
+  const linkIfAddress = (value: string) => {
+    if (ethers.utils.isAddress(value))
+      return (
+        <Link
+          href={`${ETHERSCAN_BASEURL}/address/${value}`}
+          rel="noopener noreferrer"
+          target="_blank"
+          className="text-skin-highlighted underline"
+        >
+          {value}
+        </Link>
+      );
+
+    return value;
+  };
+
+  return (
+    <div className="w-full">
+      <div className="break-words">
+        {linkIfAddress(target)}
+        <span>{`.${data?.functionName || "transfer"}(`}</span>
+      </div>
+      {!data?.decoded && !valueBN.isZero() && (
+        <div className="ml-4">{`${ethers.utils.formatEther(valueBN)} ETH`}</div>
+      )}
+      {data?.decoded?.map((decoded, index) => (
+        <div className="ml-4" key={index}>
+          {linkIfAddress(decoded)}
+        </div>
+      ))}
+      <div>{")"}</div>
+    </div>
+  );
+};
 
 const VoteButton = ({
   proposal,
@@ -189,12 +271,11 @@ const VoteButton = ({
   proposalNumber: number;
 }) => {
   const [modalOpen, setModalOpen] = useState(false);
-  const { data: userBalance } = useTokenBalance({
-    tokenContract: TOKEN_CONTRACT,
+  const { data: userVotes } = useUserVotes({
+    timestamp: proposal.proposal.timeCreated,
   });
 
-  if (proposal.state !== 1 || !userBalance || userBalance < 1)
-    return <Fragment />;
+  if (proposal.state !== 1 || !userVotes || userVotes < 1) return <Fragment />;
 
   return (
     <Fragment>
@@ -203,7 +284,11 @@ const VoteButton = ({
         open={modalOpen}
         setOpen={setModalOpen}
       >
-        <VoteModal proposal={proposal} proposalNumber={proposalNumber} />
+        <VoteModal
+          proposal={proposal}
+          proposalNumber={proposalNumber}
+          setOpen={setModalOpen}
+        />
       </ModalWrapper>
       <button
         className="bg-skin-button-accent text-skin-inverted rounded-xl px-4 py-3 font-semibold w-full sm:w-auto mt-8 sm:mt-0"

@@ -2,6 +2,6 @@
 align: left
 ---
 
-## Welcome to The Panama DAO 🎉
+## Welcome to your custom page 🎉
 
-More information on what we're building is coming soon...
+To edit this page head to `/templates/about.md`
