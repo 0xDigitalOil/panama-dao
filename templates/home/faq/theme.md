@@ -1,6 +1,6 @@
 ---
-title: How do I edit my theme?
+title: What's the longer-term plan?
 order: 1
 ---
 
-Open the `theme.config.ts` file in the root of your project directoy. You can see theme options in the `types/ThemeConfig/index.ts` file.
+We hope that the Panama DAO serves as an example of how to build a Network State leveraging Nouns culture and Nouns Builder tools.

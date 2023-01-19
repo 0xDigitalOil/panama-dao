@@ -1,6 +1,6 @@
 ---
-title: How do I edit the FAQ?
+title: What is the short-term plan?
 order: 0
 ---
 
-To edit the FAQ head to `/templates/home/faq` and edit any of the markdown files in that folder. Try setting the `title` configuration at the top of the file to edit the title and `order` configuration to change the ordering.
+Short-term we will fund public goods to start solving problems that the country has long-suffered.

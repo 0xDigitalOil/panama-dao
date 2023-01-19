@@ -80,7 +80,7 @@ export default function Vote({
         </div>
         <div className="sm:w-1/3 mt-4 sm:mt-0 sm:border-l border-skin-stroke sm:pl-6 h-full flex items-center text-skin-muted">
           This treasury exists for DAO participants to allocate resources for
-          the long-term growth and prosperity of the project.
+          the long-term growth and prosperity of the Panama DAO.
         </div>
       </div>
 

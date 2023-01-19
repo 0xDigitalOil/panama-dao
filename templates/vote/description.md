@@ -1,3 +1,3 @@
-# My DAO Governance
+# Panama DAO Governance
 
-Edit your voting description in the `templates/vote/description.md` file
+Pitiguays govern the Panama DAO. Pitiguays can vote on proposals or delegate their vote to a third party. A minimum of 1 Pitigay is required to submit proposals.
