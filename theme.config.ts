@@ -15,4 +15,7 @@ export const theme: ThemeConfig = merge(lightTheme, {
     ],
     secondary: [],
   },
+  brand: {
+    logo: "/diablicos_logo.svg"
+  },
 } as Partial<ThemeConfig>);
