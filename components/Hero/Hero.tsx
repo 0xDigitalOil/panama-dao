@@ -110,7 +110,7 @@ export default function Hero() {
         </div>
 
         <div className="text-4xl sm:text-6xl font-heading text-skin-base font-semibold">
-          {Pitiguay || "---"}
+          {"Pitiguay" || "---"}
         </div>
 
         {tokenId === currentTokenId ? (
