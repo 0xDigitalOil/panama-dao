@@ -8,7 +8,9 @@ Panama is now in crypto regulatory limbo again.
 
 In come the Panama DAO, aiming to build Panama into a crypto republic from the ground up, instead of from the top down. We are big fans of Nouns and the decentralized nature of how it's built, and we think it's a great model to build a DAO for our country. 
 
-Every day 1 NFT is minted. All auction proceeds go the the treasury. The treasury is used for funding public goods and proliferation of the DAO.
+Every day 1 NFT, called a Pitiguay, is minted. All auction proceeds go the the treasury. The treasury is used for funding public goods and proliferation of the DAO.
+
+The Panama DAO was pre-seed funded by <a href="https://prop.house/nouns">Nouns (Prop House)</a> with 1 ETH. Later seeded by <a href="https://nouns.build/dao/0xdf9b7d26c8fc806b1ae6273684556761ff02d422/87">Builder DAO</a> with 20 ETH. Thank you!
 
 The NFTs are composed of traits inspired by Panamanian history and culture.
 
