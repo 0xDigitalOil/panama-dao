@@ -1,5 +1,5 @@
 ---
-title: What is the short-term plan?
+title: What's the short-term plan?
 order: 0
 ---
 
