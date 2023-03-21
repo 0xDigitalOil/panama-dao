@@ -67,7 +67,7 @@ export const getTokenInfo = async ({
     tokenContract.ownerOf(tokenIdBn),
   ]);
 
-  if (tokenURI.status === "rejected") throw new Error("Error token not found");
+  if (tokenURI.status === "rejected") throw new Error("Error token not found"); 
 
   return {
     ...parseBase64String(tokenURI.value),
