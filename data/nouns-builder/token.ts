@@ -92,7 +92,7 @@ export const getFounder = async ({
   return { wallet, ownershipPct, vestExpiry } as Founder;
 };
 
-export const getBalanceOf = async ({
+export const getBalanceOf = async ({ 
   address,
   user,
 }: {
