@@ -16,9 +16,9 @@ export default function Footer() {
         ))}
       </div>
       <div className="w-full text-center text-xs text-skin-muted mt-6 basis-full">
-        <a href="https://adame.life" target="_blank" rel="noopener" referrerPolicy="origin">Made by Adam Eisenman</a>
+        <a href="https://adame.life" referrerPolicy="origin">Made by Adam Eisenman</a>
         {" · "}
-        <a href="https://multiplai.cc" target="_blank" rel="noopener" referrerPolicy="origin">Learn to build apps like this with AI</a>
+        <a href="https://multiplai.cc" referrerPolicy="origin">Learn to build apps like this with AI</a>
       </div>
     </div>
   );
