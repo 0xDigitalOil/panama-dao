@@ -50,7 +50,7 @@ export default function SiteComponent(
   props: InferGetStaticPropsType<typeof getStaticProps>
 ) {
   const { data } = props;
-  const align = data.frontmatter?.align;
+  const align = data.frontmatter?.align as string | undefined;
 
   const getAlignment = () => {
     switch (align) {

@@ -31,7 +31,7 @@
     "jotai": "^1.11.1",
     "lodash.merge": "^4.6.2",
     "next": "13.0.5",
-    "next-mdx-remote": "^4.2.0",
+    "next-mdx-remote": "^6.0.0",
     "nextjs-cors": "^2.1.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",

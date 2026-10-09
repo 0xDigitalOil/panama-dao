@@ -145,7 +145,7 @@ export default function SiteComponent({
                       className={
                         "flex items-center font-semibold justify-between w-full text-left text-4xl font-heading text-skin-base hover:text-skin-highlighted"
                       }
-                      title={x.frontmatter?.title || ""}
+                      title={String(x.frontmatter?.title ?? "")}
                     >
                       <div className="prose prose-skin prose-headings:font-heading break-words max-w-none mt-8">
                         <MDXRemote {...x} />
